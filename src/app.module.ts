@@ -1,7 +1,8 @@
 import { Module } from "@nestjs/common";
+import { AutosModule } from './autos/autos.module';
 
 @Module({
-  imports: [],
+  imports: [AutosModule],
   controllers: [],
   providers: [],
 })
