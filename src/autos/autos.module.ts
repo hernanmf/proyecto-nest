@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { AutosController } from './autos.controller';
+import { Module } from "@nestjs/common";
+import { AutosController } from "./autos.controller";
 
 @Module({
   controllers: [AutosController]

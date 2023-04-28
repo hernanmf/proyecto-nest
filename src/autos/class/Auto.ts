@@ -16,7 +16,7 @@ export class Auto {
     anio: number,
     tipo: string,
     precio: number,
-    capacidadCarga?: number
+    capacidadCarga?: number,
   ) {
     this.patente = patente;
     this.marca = marca;

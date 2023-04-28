@@ -6,6 +6,7 @@ export class AutosController {
   @Get()
   getAutos() {
     return ["Volkswagen", "Fiat", "Peugeot"];
-  }
 
+    
+  }
 }
