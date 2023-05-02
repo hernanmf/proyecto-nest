@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
 import { AutosService } from "./autos.service.js";
+import { CreateAutoDto } from "./dto/create-auto.dto.js";
 
 @Controller( "autos" )
+@UsePipes( ValidationPipe )
 export class AutosController {
 
   constructor( private readonly autosService:AutosService ) {
@@ -20,9 +22,9 @@ export class AutosController {
   }
 
   @Post()
-  postAuto( @Body() body:any ) {
-    console.log(body);
-    return body
+  postAuto( @Body() createAutoDto:CreateAutoDto ) {
+    console.log(createAutoDto);
+    return createAutoDto;
   }
 
   @Put( ':id' )

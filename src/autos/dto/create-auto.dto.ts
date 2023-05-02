@@ -1,13 +1,37 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
 
-export class Auto{
+export class CreateAutoDto{
+  
+  @IsString()
   @IsNotEmpty()
-  private patente: string;
+  readonly patente: string;
+  
+  @IsString()
+  @IsNotEmpty()
   readonly marca: string;
+  
+  @IsString()
+  @IsNotEmpty()
   readonly modelo: string;
+  
+  @IsString()
+  @IsNotEmpty()
   readonly version: string;
-  private anio: number;
+  
+  @IsNotEmpty()
+  @IsNumber()
+  readonly anio: number;
+  
+  @IsString()
+  @IsNotEmpty()
   readonly tipo: string;
-  private precio: number;
-  private capacidadCarga?: number;
+  
+  @IsNotEmpty()
+  @IsNumber()
+  @IsPositive()
+  readonly precio: number;
+  
+  @IsNumber()
+  readonly capacidadCarga?: number;
+
 }
