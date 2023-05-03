@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { NotFoundError } from 'rxjs';
 import { v4 as uuid } from 'uuid';
+import { CreateAutoDto } from './dto/create-auto.dto';
+import { Auto } from './interfaces/auto.interface';
 
 @Injectable()
 export class AutosService {
 
-  private autos = [
+  private autos: Auto[] = [
   {
     id: uuid(),
     patente: "ABC123",
@@ -26,7 +27,7 @@ export class AutosService {
     anio: 2023,
     tipo: "Sedan",
     precio: 28000,
-    capacidadCarga: undefined
+    capacidadCarga: 0
   },
   {
     id: uuid(),
@@ -48,7 +49,7 @@ export class AutosService {
     anio: 2022,
     tipo: "Sedan",
     precio: 24000,
-    capacidadCarga: undefined
+    capacidadCarga: 0
   },
   {
     id: uuid(),
@@ -70,7 +71,7 @@ export class AutosService {
     anio: 2022,
     tipo: "Deportivo",
     precio: 45000,
-    capacidadCarga: undefined
+    capacidadCarga: 0
   },
   {
     id: uuid(),
@@ -81,7 +82,7 @@ export class AutosService {
     anio: 2023,
     tipo: "Deportivo",
     precio: 48000,
-    capacidadCarga: undefined
+    capacidadCarga: 0
   },
   {
     id: uuid(),
@@ -92,7 +93,7 @@ export class AutosService {
     anio: 2022,
     tipo: "Deportivo",
     precio: 42000,
-    capacidadCarga: undefined
+    capacidadCarga: 0
   },
   {
     id: uuid(),
@@ -126,6 +127,21 @@ export class AutosService {
     let auto = this.autos.find(e => e.id === id);//Fernando recomienda hacerlo asi para validaciones y pipes
     if (!auto) { throw new NotFoundException(`No se encontro el auto con el id ${id}`)}
     return auto;
+  }
+
+  public postAuto(createAutoDto: CreateAutoDto) {
+    //Hago checkeo de si hay auto con esa patente aunq eso a futuro lo hara el motor de bbdd
+    let mismaPatente = this.autos.find(e => e.patente === createAutoDto.patente);
+    if (mismaPatente) {  throw new NotFoundException(`Ya existe un auto con la patente ${createAutoDto.patente}`);}
+    
+    //si la patente no existe, no va a la excepcion y hace el push
+    const nuevoAuto: Auto = {
+        id: uuid(),
+        ...createAutoDto//luego del id le asigna todas las props q trae, las esparce
+      }
+      
+    this.autos.push(nuevoAuto);
+    return nuevoAuto;    
   }
 
 }

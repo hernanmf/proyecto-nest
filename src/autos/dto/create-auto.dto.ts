@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsPositive, IsString, isNumberString } from "class-validator";
 
 export class CreateAutoDto{
   
@@ -19,7 +19,7 @@ export class CreateAutoDto{
   readonly version: string;
   
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   readonly anio: number;
   
   @IsString()
@@ -27,11 +27,11 @@ export class CreateAutoDto{
   readonly tipo: string;
   
   @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
+  @IsNumberString()
   readonly precio: number;
   
-  @IsNumber()
+  @IsOptional()
+  @IsNumberString()
   readonly capacidadCarga?: number;
 
 }

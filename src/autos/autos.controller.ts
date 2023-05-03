@@ -23,8 +23,12 @@ export class AutosController {
 
   @Post()
   postAuto( @Body() createAutoDto:CreateAutoDto ) {
-    console.log(createAutoDto);
-    return createAutoDto;
+
+    return this.autosService.postAuto(createAutoDto);
+
+    /*     console.log(`Vino esto : ${createAutoDto}`);
+    this.autosService.postAuto(createAutoDto);
+    console.log(`Resultado: ${this.autosService}`); */
   }
 
   @Put( ':id' )
