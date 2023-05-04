@@ -139,9 +139,31 @@ export class AutosService {
         id: uuid(),
         ...createAutoDto//luego del id le asigna todas las props q trae, las esparce
       }
-      
-    this.autos.push(nuevoAuto);
+    this.autos.push(nuevoAuto);// puede llevar await para esperar el push en la bbdd
     return nuevoAuto;    
+  }
+
+  public putAuto(id: string, createAutoDto: CreateAutoDto) {
+    
+    let autoGuardado = this.getAutoById(id);
+    //como getAutoById tiene la excepcion, si no esta el id, corta.
+    
+    this.autos = this.autos.map(auto => {
+      if (auto.id === id) {
+        autoGuardado = { ...autoGuardado, ...createAutoDto }
+      }
+      return autoGuardado;
+    });
+    return autoGuardado;
+  }
+
+  public deleteAuto(id:string) {
+    
+    const autoABorrar = this.getAutoById(id);
+    //como getAutoById tiene la excepcion, si no esta el id, corta.
+    
+    this.autos = this.autos.filter(auto => auto.id !== id);
+    //al array original, le asigno el mismo array filtrando el del id.
   }
 
 }

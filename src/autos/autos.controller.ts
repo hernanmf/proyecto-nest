@@ -23,25 +23,21 @@ export class AutosController {
 
   @Post()
   postAuto( @Body() createAutoDto:CreateAutoDto ) {
-
     return this.autosService.postAuto(createAutoDto);
-
-    /*     console.log(`Vino esto : ${createAutoDto}`);
-    this.autosService.postAuto(createAutoDto);
-    console.log(`Resultado: ${this.autosService}`); */
   }
 
   @Put( ':id' )
   putAuto(
     @Param( 'id' , ParseUUIDPipe) id: string,
-    @Body() body:any
+    @Body() createAutoDto: CreateAutoDto
   ) {
-    console.log(body);
-    return body;
+    return this.autosService.putAuto(id, createAutoDto);
   }
 
   @Delete( ':id' )
   deleteAuto( @Param( 'id' , ParseUUIDPipe ) id: string ) {
+    
+    this.autosService.deleteAuto(id);
     console.log(`delete ${id}`);
     return {
       method: 'delete',
