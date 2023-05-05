@@ -8,5 +8,4 @@ export interface Auto {
   tipo: string;
   precio: number;
   capacidadCarga?: number;
-
 }

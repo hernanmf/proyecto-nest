@@ -13,7 +13,7 @@ const mostrarAutos = () => {
       <td>${a.marca}</td>
       <td>${a.modelo}</td>
       <td>${a.precio}</td>
-      <td> <button type="button" class="btnVerAuto" value="${a.id}">Ver Detalles</button> </td>
+      <td> <button type="button" class="btnVerAuto" id="${a.id}">Ver Detalles</button> </td>
      
       </tr>
       `;
@@ -21,19 +21,17 @@ const mostrarAutos = () => {
          /* <td> <button type="button" class="btnEliminar" id="${r.id}">Eliminar</button></td>  */
 
   contenedor.innerHTML = tabla;
-  console.log("se hizo tabla");
-  const btnVerAutos = document.querySelectorAll('.btnVerAuto');
-  let btnVerAutosListeners = [];
- console.log("se genero array");
-  btnVerAutos.forEach((btnVerAuto) => {
-    const autoId = btnVerAutos.value;
-    const btnVerAutoListener = () => {
+  
+
+  let btnesVerAuto = document.querySelectorAll('.btnVerAuto');
+
+  btnesVerAuto.forEach(btn => {
+    
+    btn.addEventListener('click',(e) => {
       alert(`Has hecho clic en el botón Ver Auto con el ID ${autoId}.`);
     // Aquí puedes hacer lo que necesites con el ID del auto
-    };
-    btnVerAutosListeners.push(btnVerAutoListener);
+    });
   });
-  console.log("se generaron los eventlister");
   
 }
 
