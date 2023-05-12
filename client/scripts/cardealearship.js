@@ -23,12 +23,15 @@ const mostrarAutos = () => {
   contenedor.innerHTML = tabla;
   
 
-  let btnesVerAuto = document.querySelectorAll('.btnVerAuto');
+  let botonesVerAuto = document.querySelectorAll('.btnVerAuto');
 
-  btnesVerAuto.forEach(btn => {
-    
-    btn.addEventListener('click',(e) => {
-      alert(`Has hecho clic en el botón Ver Auto con el ID ${autoId}.`);
+  botonesVerAuto.forEach(boton => { 
+    boton.addEventListener('click', (e) => {
+      
+      let id = e.target.id;
+      let detalleAuto = autos.find(e => e.id === id);
+      console.log(detalleAuto);
+      alert(`${detalleAuto.marca} ${detalleAuto.modelo} ${detalleAuto.version} \n${detalleAuto.tipo} ${detalleAuto.anio} \n${detalleAuto.capacidadCarga} \n\n${detalleAuto.precio} \n\n${detalleAuto.id}`);
     // Aquí puedes hacer lo que necesites con el ID del auto
     });
   });
