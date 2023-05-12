@@ -14,25 +14,45 @@ const mostrarAutos = () => {
       <td>${a.modelo}</td>
       <td>${a.precio}</td>
       <td> <button type="button" class="btnVerAuto" id="${a.id}">Ver Detalles</button> </td>
-     
+      <td> <button type="button" class="btnEliminar" id="${a.id}">Eliminar</button></td> 
       </tr>
       `;
     }
-         /* <td> <button type="button" class="btnEliminar" id="${r.id}">Eliminar</button></td>  */
 
   contenedor.innerHTML = tabla;
   
-
+//Eventos de los botones de ver auto
   let botonesVerAuto = document.querySelectorAll('.btnVerAuto');
-
   botonesVerAuto.forEach(boton => { 
     boton.addEventListener('click', (e) => {
-      
       let id = e.target.id;
       let detalleAuto = autos.find(e => e.id === id);
-      console.log(detalleAuto);
       alert(`${detalleAuto.marca} ${detalleAuto.modelo} ${detalleAuto.version} \n${detalleAuto.tipo} ${detalleAuto.anio} \n${detalleAuto.capacidadCarga} \n\n${detalleAuto.precio} \n\n${detalleAuto.id}`);
-    // Aquí puedes hacer lo que necesites con el ID del auto
+    });
+  });
+
+//Eventos de los botones de eliminar auto
+  let botonesEliminar = document.querySelectorAll('.btnEliminar');
+
+  const borrarAuto = async (e) => {
+    let id = e.target.id;
+
+    let respuesta = await fetch(`${endpoint}/${id}`, {
+      method: 'DELETE',
+      headers: { "Content-Type": "application/json" }
+    })
+
+    loadAutos();
+  }
+  
+  botonesEliminar.forEach(boton => { 
+    boton.addEventListener('click', (e) => {    
+      let id = e.target.id;
+      let detalleAuto = autos.find(e => e.id === id);
+      borrarAuto(e);
+      
+      alert(`Se ha eliminado: \n${detalleAuto.marca} ${detalleAuto.modelo} ${detalleAuto.version} \n${detalleAuto.id}`);
+      mostrarAutos();
     });
   });
   
@@ -47,11 +67,6 @@ const mostrarAutos = () => {
   }
 
 loadAutos();
-
-//usamos el evento DOMCONTENTLOADED para que se genere el eventlistener del boton una vez generado sino da null
-
-
-
 
 /* function verAuto(idAuto) {
   fetch(url_base + endpoint +"/"+idAuto)
